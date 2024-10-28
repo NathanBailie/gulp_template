@@ -1,17 +1,10 @@
+// libs
+@use "./libs/normalize.min.css" as *;
+
+// helpers
 @use "./helpers/variables.scss" as *;
 @use "./helpers/mixins.scss" as *;
-@use "./libs/normalize.min.css" as *;
+@use "./helpers/base_styles.scss" as *;
 
 // sections
 // @use "sections/" as *;
-
-* {
-  font-family: '', sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background: rgb(217, 210, 160);
-}
