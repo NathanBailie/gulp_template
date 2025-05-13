@@ -10,8 +10,8 @@ I used the [starter template](https://github.com/YauhenKavalchuk/Starting_templa
 
 ```
 npm install - install dependencies
-gulp dev - starts gulp in development mode
-gulp prod - builds the final project
+npm run dev dev - starts gulp in development mode
+npm run build - builds the final project
 ```
 
 ---
@@ -29,6 +29,7 @@ gulp prod - builds the final project
 - `gulp-terser` — minifies JavaScript files
 - `gulp-useref` — parses build blocks in HTML and merges/minifies - resources
 - `gulp.spritesmith` — generates sprites from images
+- `gulp-copy` — copies files and folders while preserving directory structure
 
 ---
 

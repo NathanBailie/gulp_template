@@ -2,7 +2,10 @@
 	"name": "gulp_project",
 	"version": "1.0.0",
 	"description": "",
-	"scripts": {},
+	"scripts": {
+		"build": "cross-env NODE_ENV=production gulp prod",
+		"dev": "cross-env NODE_ENV=development gulp dev"
+	},
 	"author": "",
 	"type": "module",
 	"devDependencies": {
