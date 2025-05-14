@@ -50,8 +50,13 @@ function html() {
 }
 
 function compileSass() {
-	return src('./src/scss/main.scss', { allowEmpty: true })
-		.pipe(sassCompiler().on('error', sassCompiler.logError))
+	return src('./src/scss/**/*.scss', { allowEmpty: true })
+		.pipe(
+			sassCompiler({ outputStyle: 'expanded' }).on(
+				'error',
+				sassCompiler.logError
+			)
+		)
 		.pipe(
 			gulpif(
 				process.env.NODE_ENV === 'production',
@@ -67,7 +72,7 @@ function compileSass() {
 
 function scripts() {
 	if (process.env.NODE_ENV === 'production') {
-		return src('./src/js/**/*.js').pipe(dest('./build/js'));
+		return Promise.resolve();
 	}
 	return src('./src/js/**/*.js').pipe(browserSync.stream());
 }
@@ -83,6 +88,20 @@ function sprite(done) {
 function copyImages() {
 	if (directoryExists('./src/assets/img')) {
 		return src('./src/assets/img/**/*').pipe(copy('./build', { prefix: 1 }));
+	}
+	return Promise.resolve();
+}
+
+function copySounds() {
+	if (directoryExists('./src/assets/sounds')) {
+		return src('./src/assets/sounds/**/*').pipe(copy('./build', { prefix: 1 }));
+	}
+	return Promise.resolve();
+}
+
+function copyVideos() {
+	if (directoryExists('./src/assets/videos')) {
+		return src('./src/assets/videos/**/*').pipe(copy('./build', { prefix: 1 }));
 	}
 	return Promise.resolve();
 }
@@ -151,6 +170,14 @@ export const dev = series(
 export const prod = series(
 	cleanDist,
 	compileSass,
-	parallel(scripts, copyImages, copyFonts, copyIcons, copyLibs),
+	parallel(
+		scripts,
+		copyImages,
+		copySounds,
+		copyVideos,
+		copyFonts,
+		copyIcons,
+		copyLibs
+	),
 	build
 );
